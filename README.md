@@ -49,4 +49,7 @@ Este projeto demonstra a criação de uma interface moderna de login utilizando 
 
 
 <img src="https://github.com/user-attachments/assets/e35008c6-dfd7-45f7-b5a9-96e49708930f" alt="Simulator Screenshot" width="400"/>
+<img src="https://github.com/user-attachments/assets/5565a042-1297-4adc-ab41-f233413eee1f" alt="Simulator Screenshot" width="400"/>
+<img src="https://github.com/user-attachments/assets/f24f95ca-b70d-43af-8701-7c3396b0db63" alt="Simulator Screenshot" width="400"/>
+<img src="https://github.com/user-attachments/assets/970d6758-1217-498a-ad36-e0e6b2d97f76" alt="Simulator Screenshot" width="400"/>
 
