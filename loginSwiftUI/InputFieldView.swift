@@ -10,29 +10,56 @@ import SwiftUI
 struct InputFieldView: View {
     @Binding var data: String
     var title: String?
+    var isSecure: Bool = false
+    
+    @State private var isPasswordVisible: Bool = false
+
     var body: some View {
-      ZStack {
-        TextField("", text: $data)
-          .padding(.horizontal, 10)
-          .frame(height: 42)
-          .overlay(
-            RoundedRectangle(cornerSize: CGSize(width: 4, height: 4))
-                .stroke(Color.gray, lineWidth: 1)
-          )
-        HStack {                    // HStack for the text
-          Text(title ?? "Input")
-            .font(.headline)
-            .fontWeight(.thin)      // making the text small
-            .foregroundColor(Color.gray)    // and gray
-            .multilineTextAlignment(.leading)
-            .padding(4)
-            .background(.white)     // adding some white background
-          Spacer()                  // pushing the text to the left
+        ZStack {
+            if isSecure && !isPasswordVisible {
+                SecureField("", text: $data)
+                    .padding(.horizontal, 10)
+                    .frame(height: 42)
+                    .overlay(
+                        RoundedRectangle(cornerSize: CGSize(width: 4, height: 4))
+                            .stroke(Color.gray, lineWidth: 1)
+                    )
+            } else {
+                TextField("", text: $data)
+                    .padding(.horizontal, 10)
+                    .frame(height: 42)
+                    .overlay(
+                        RoundedRectangle(cornerSize: CGSize(width: 4, height: 4))
+                            .stroke(Color.gray, lineWidth: 1)
+                    )
+            }
+
+            HStack {
+                // Title Text
+                Text(title ?? "Input")
+                    .font(.headline)
+                    .fontWeight(.thin)
+                    .foregroundColor(Color.gray)
+                    .multilineTextAlignment(.leading)
+                    .padding(4)
+                    .background(Color.white)
+                Spacer()
+                
+                // Eye Icon for Secure Fields
+                if isSecure {
+                    Button(action: {
+                        isPasswordVisible.toggle()
+                    }) {
+                        Image(systemName: isPasswordVisible ? "eye" : "eye.slash")
+                            .foregroundColor(.gray)
+                    }
+                    .padding(.trailing, 8)
+                }
+            }
+            .padding(.leading, 8)
+            .offset(CGSize(width: 0, height: -20))
         }
-        .padding(.leading, 8)
-        .offset(CGSize(width: 0, height: -20))  // pushign the text up to overlay the border of the input field
-      }.padding(4)
-        
+        .padding(4)
     }
 }
 
@@ -40,6 +67,9 @@ struct InputFieldView_Previews: PreviewProvider {
     @State static var data: String = ""
     
     static var previews: some View {
-        InputFieldView (data: $data, title: "Password")
+        VStack {
+            InputFieldView(data: $data, title: "Password", isSecure: true)
+            InputFieldView(data: $data, title: "Username")
+        }
     }
 }
