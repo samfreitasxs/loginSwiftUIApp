@@ -76,7 +76,6 @@ struct ContentView: View {
         }
     }
     
-    // MARK: - Authentication Logic
     func signIn() {
         // Reset error message
         errorMessage = nil
